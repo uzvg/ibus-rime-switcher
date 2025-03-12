@@ -1,0 +1,14 @@
+builtin emulate -L zsh
+
+local im=$(dbus-send --session \
+    --type=method_call \
+    --print-reply=literal \
+    --dest=org.gnome.Shell \
+    /org/gnome/Shell/Extensions/IbusSwitcher org.gnome.Shell.Extensions.IbusSwitcher.CurrentSource)
+
+# 使用 Zsh 参数扩展替代多次赋值
+local im_clean_str="${im//[[:space:]]/}"  # 删除所有空白后取冒号前内容
+local -a im_array=(${(s:|:)im_clean_str})       # 分割数组并保留空元素
+local im_array=(${im_array:#})                        # 过滤所有空元素
+
+print $im_array
