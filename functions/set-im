@@ -1,0 +1,11 @@
+builtin emulate -L zsh
+
+if (( # != 2 )); then
+  print -u2 "usage: ${0} <im_index> <im_mode>"
+  return 1
+fi
+
+local im_index=$1
+local im_mode=$2
+
+dbus-send --session --type=method_call --print-reply=literal --dest=org.gnome.Shell /org/gnome/Shell/Extensions/IbusSwitcher org.gnome.Shell.Extensions.IbusSwitcher.SwitchSource uint32:${im_index} string:${im_mode} > /dev/null 2>&1
