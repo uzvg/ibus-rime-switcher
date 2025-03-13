@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 builtin emulate -L zsh
 
 local im=$(dbus-send --session \
