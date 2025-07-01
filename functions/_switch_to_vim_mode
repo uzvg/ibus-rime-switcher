@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+_set_im_input_method "${IBUS_RIME_VIM_MODE_STATUS[@]}"

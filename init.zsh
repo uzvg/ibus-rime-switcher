@@ -6,4 +6,5 @@ if ! gnome-extensions info ibus-switcher@kevinhwang91.github.com > /dev/null 2>&
     exit 1
 fi
 
-typeset -gax RIME_IBUS_VIM_NORMAL_IM=(1 A)
+typeset -agx IBUS_RIME_VIM_MODE_STATUS=(1 A)
+typeset -agx IBUS_RIME_ORIGIN_MODE_STATUS

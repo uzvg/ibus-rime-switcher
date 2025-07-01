@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+builtin emulate -L zsh
+
+local im_status_output=$(dbus-send --session \
+    --type=method_call \
+    --print-reply=literal \
+    --dest=org.gnome.Shell \
+    /org/gnome/Shell/Extensions/IbusSwitcher org.gnome.Shell.Extensions.IbusSwitcher.CurrentSource)
+
+# 删除输出的所有空白
+local im_trimmed_output="${im_status_output//[[:space:]]/}"
+# 使用|将输出分割为数组并保存到 IBUS_RIME_ORIGIN_MODE_STATUS 全局数组变量中
+IBUS_RIME_ORIGIN_MODE_STATUS=(${(s:|:)im_trimmed_output})
+
+# print ${im_status_array}
+# print "rime input method: ${im_status_array[1]}"
+# print "rime input mode: ${im_status_array[2]}"
+# typeset -agx IBUS_RIME_VIM_MODE_STATUS=(1 A)
+# typeset -agx IBUS_RIME_ORIGIN_MODE_STATUS
